@@ -1,4 +1,3 @@
-
 import ipgetter
 import smtplib
 
@@ -23,16 +22,18 @@ def sendemail(from_addr, to_addr_list, cc_addr_list,
 # gets my external IP
 myip = ipgetter.myip()
 
-f = open('myip.dat','r+')
+import os
+fname = "c:\sendIP\myip.dat"
+f = open(fname,'r+')
 fileip = f.read()
 
 # sends the IP to my e-mail address
 if myip != None and myip != fileip:
-    f.write(myip) # python will convert \n to os.linesep
+    f.write(myip)
     f.close()
     sendemail(from_addr    = 'from@gmail.com', 
               to_addr_list = ['to@gmail.com'],
-              cc_addr_list = ['cc@gmail.com'], 
+              cc_addr_list = [''], 
               subject      = 'IP change notification', 
               message      = myip, 
               login        = 'from', 
